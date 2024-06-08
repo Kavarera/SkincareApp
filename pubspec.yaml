@@ -2,20 +2,23 @@ name: toko_skincare
 version: 1.0.0+1
 publish_to: none
 description: A new Flutter project.
-environment: 
+environment:
   sdk: '>=3.3.4 <4.0.0'
 
-dependencies: 
+dependencies:
+  banner_carousel: ^1.2.1
   cupertino_icons: ^1.0.6
+  flutter:
+    sdk: flutter
   get: 4.6.6
-  flutter: 
-    sdk: flutter
+  google_fonts: 6.2.1
 
-dev_dependencies: 
+dev_dependencies:
   flutter_lints: ^3.0.0
-  flutter_test: 
+  flutter_test:
     sdk: flutter
 
-flutter: 
+flutter:
   uses-material-design: true
-
+  assets:
+    - assets/images/

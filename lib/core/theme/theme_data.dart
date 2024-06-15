@@ -3,13 +3,13 @@ import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
   static final ThemeData lightTheme = ThemeData(
-    primaryColor: Color.fromRGBO(255, 95, 255, 1),
+    primaryColor: Color.fromRGBO(169, 107, 169, 1),
     colorScheme: ColorScheme.fromSwatch().copyWith(
       secondary: Color.fromRGBO(162, 22, 175, 1),
     ),
     scaffoldBackgroundColor: Colors.white,
     appBarTheme: AppBarTheme(
-      backgroundColor: Color.fromRGBO(255, 95, 255, 1),
+      backgroundColor: Color.fromRGBO(176, 86, 176, 1),
       foregroundColor: Colors.white,
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(

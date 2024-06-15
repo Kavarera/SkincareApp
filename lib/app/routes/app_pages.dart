@@ -1,5 +1,9 @@
 import 'package:get/get.dart';
 
+import '../modules/admin/beranda_admin/bindings/beranda_admin_binding.dart';
+import '../modules/admin/beranda_admin/views/beranda_admin_view.dart';
+import '../modules/admin/new_reseller/bindings/new_reseller_binding.dart';
+import '../modules/admin/new_reseller/views/new_reseller_view.dart';
 import '../modules/history/bindings/history_binding.dart';
 import '../modules/history/views/history_view.dart';
 import '../modules/home/bindings/home_binding.dart';
@@ -57,6 +61,16 @@ class AppPages {
       name: _Paths.PROFILE_EDIT,
       page: () => ProfileEditView(),
       binding: ProfileEditBinding(),
+    ),
+    GetPage(
+      name: _Paths.BERANDA_ADMIN,
+      page: () => BerandaAdminView(),
+      binding: BerandaAdminBinding(),
+    ),
+    GetPage(
+      name: _Paths.NEW_RESELLER,
+      page: () => const NewResellerView(),
+      binding: NewResellerBinding(),
     ),
   ];
 }

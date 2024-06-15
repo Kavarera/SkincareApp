@@ -10,6 +10,8 @@ abstract class Routes {
   static const HISTORY = _Paths.HISTORY;
   static const PROFILE = _Paths.PROFILE;
   static const PROFILE_EDIT = _Paths.PROFILE_EDIT;
+  static const BERANDA_ADMIN = _Paths.BERANDA_ADMIN;
+  static const NEW_RESELLER = _Paths.NEW_RESELLER;
 }
 
 abstract class _Paths {
@@ -21,4 +23,6 @@ abstract class _Paths {
   static const HISTORY = '/history';
   static const PROFILE = '/profile';
   static const PROFILE_EDIT = '/profile-edit';
+  static const BERANDA_ADMIN = '/beranda-admin';
+  static const NEW_RESELLER = '/new-reseller';
 }

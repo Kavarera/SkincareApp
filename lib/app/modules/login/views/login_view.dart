@@ -95,14 +95,19 @@ class LoginView extends GetView<LoginController> {
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () {
-                  Get.offNamed(Routes.HOME);
+                  controller.userLogin(
+                      _usernameController.text, _passwordController.text);
                 },
-                child: Text(
-                  'Login',
-                  style: GoogleFonts.poppins(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w600,
-                  ),
+                child: Obx(
+                  () => controller.isLoading.value
+                      ? CircularProgressIndicator()
+                      : Text(
+                          'Login',
+                          style: GoogleFonts.poppins(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
                 ),
               ),
             ),
@@ -118,7 +123,7 @@ class LoginView extends GetView<LoginController> {
                   ),
                   InkWell(
                     onTap: () {
-                      Get.toNamed(Routes.REGISTER);
+                      Get.toNamed(Routes.BERANDA_ADMIN);
                     },
                     child: Text(
                       'Register',

@@ -1,12 +1,12 @@
 class User {
-  final int Id;
+  final int id;
   final String username;
   final String role;
   final String? referralCodeUsed;
   final String? reseller;
   late String? access_token;
   User(
-      {required this.Id,
+      {required this.id,
       required this.username,
       required this.role,
       required this.referralCodeUsed,
@@ -14,7 +14,7 @@ class User {
       this.access_token});
 
   Map<String, dynamic> toJson() => {
-        'Id': Id,
+        'id': id,
         'username': username,
         'role': role,
         'referralCodeUsed': referralCodeUsed,
@@ -23,7 +23,7 @@ class User {
       };
 
   factory User.fromJson(Map<String, dynamic> json) => User(
-      Id: json['id'],
+      id: json['id'],
       username: json['username'],
       role: json['role'],
       referralCodeUsed: json['referralCodeUsed'],

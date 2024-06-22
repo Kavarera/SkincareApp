@@ -4,6 +4,8 @@ import '../modules/admin/beranda_admin/bindings/beranda_admin_binding.dart';
 import '../modules/admin/beranda_admin/views/beranda_admin_view.dart';
 import '../modules/admin/new_reseller/bindings/new_reseller_binding.dart';
 import '../modules/admin/new_reseller/views/new_reseller_view.dart';
+import '../modules/detail_product/bindings/detail_product_binding.dart';
+import '../modules/detail_product/views/detail_product_view.dart';
 import '../modules/history/bindings/history_binding.dart';
 import '../modules/history/views/history_view.dart';
 import '../modules/home/bindings/home_binding.dart';
@@ -71,6 +73,11 @@ class AppPages {
       name: _Paths.NEW_RESELLER,
       page: () => const NewResellerView(),
       binding: NewResellerBinding(),
+    ),
+    GetPage(
+      name: _Paths.DETAIL_PRODUCT,
+      page: () => DetailProductView(),
+      binding: DetailProductBinding(),
     ),
   ];
 }

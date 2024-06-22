@@ -123,7 +123,7 @@ class LoginView extends GetView<LoginController> {
                   ),
                   InkWell(
                     onTap: () {
-                      Get.toNamed(Routes.BERANDA_ADMIN);
+                      Get.toNamed(Routes.REGISTER);
                     },
                     child: Text(
                       'Register',

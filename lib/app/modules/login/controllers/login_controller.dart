@@ -28,6 +28,7 @@ class LoginController extends GetxController {
         Get.offNamed(Routes.HOME);
       }
     } catch (e) {
+      print(e);
       Get.snackbar('failed', e.toString());
     } finally {
       isLoading.value = false;

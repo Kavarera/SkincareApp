@@ -183,16 +183,23 @@ class RegisterView extends GetView<RegisterController> {
               Container(
                 padding: const EdgeInsets.only(top: 20),
                 width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () {},
-                  child: Text(
-                    'Login',
-                    style: GoogleFonts.poppins(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
+                child: ElevatedButton(onPressed: () {
+                  controller.register(
+                      _nowhatsappController.text,
+                      _passwordController.text,
+                      _verifypasswordController.text,
+                      _kodereferalController.text);
+                }, child: Obx(() {
+                  return controller.isLoading == true
+                      ? CircularProgressIndicator()
+                      : Text(
+                          'Register',
+                          style: GoogleFonts.poppins(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        );
+                })),
               ),
               SizedBox(
                 height: 30,

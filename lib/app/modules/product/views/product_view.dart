@@ -4,18 +4,21 @@ import 'package:flutter/widgets.dart';
 
 import 'package:get/get.dart';
 import 'package:toko_skincare/app/modules/product/views/widget_product.dart';
+import 'package:toko_skincare/app/routes/app_pages.dart';
 
+import '../../home/controllers/home_controller.dart';
 import '../controllers/product_controller.dart';
 
 class ProductView extends GetView<ProductController> {
   ProductView({Key? key}) : super(key: key);
   final List<BannerModel> _listBanners = [
     BannerModel(imagePath: 'assets/images/banner1.jpeg', id: '1'),
-    BannerModel(imagePath: 'assets/images/banner2.jpg', id: '2'),
+    BannerModel(imagePath: 'assets/images/banner2.png', id: '2'),
   ];
 
   @override
   Widget build(BuildContext context) {
+    HomeController hcontroller = Get.find();
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -52,9 +55,17 @@ class ProductView extends GetView<ProductController> {
                   childAspectRatio:
                       0.75, // Rasio aspek untuk menyesuaikan ukuran kartu
                 ),
-                itemCount: 10,
+                itemCount: hcontroller.listProduct.length,
                 itemBuilder: (context, index) {
-                  return ProductCard();
+                  return InkWell(
+                    onTap: () {
+                      hcontroller.navigateToProduct(
+                          hcontroller.listProduct.value.elementAt(index));
+                    },
+                    child: ProductCard(
+                      product: hcontroller.listProduct.value.elementAt(index),
+                    ),
+                  );
                 },
               ),
             )

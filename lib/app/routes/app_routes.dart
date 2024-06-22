@@ -12,6 +12,7 @@ abstract class Routes {
   static const PROFILE_EDIT = _Paths.PROFILE_EDIT;
   static const BERANDA_ADMIN = _Paths.BERANDA_ADMIN;
   static const NEW_RESELLER = _Paths.NEW_RESELLER;
+  static const DETAIL_PRODUCT = _Paths.DETAIL_PRODUCT;
 }
 
 abstract class _Paths {
@@ -25,4 +26,5 @@ abstract class _Paths {
   static const PROFILE_EDIT = '/profile-edit';
   static const BERANDA_ADMIN = '/beranda-admin';
   static const NEW_RESELLER = '/new-reseller';
+  static const DETAIL_PRODUCT = '/detail-product';
 }

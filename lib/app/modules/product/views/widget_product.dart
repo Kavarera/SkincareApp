@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import '../../../data/models/product_model.dart';
+import 'package:intl/intl.dart';
 
 class ProductCard extends StatelessWidget {
-  final String? imageUrl;
-  final String? title;
-  const ProductCard({Key? key, this.imageUrl, this.title}) : super(key: key);
+  final Product product;
+  ProductCard({Key? key, required this.product}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +22,7 @@ class ProductCard extends StatelessWidget {
               topRight: Radius.circular(15.0),
             ),
             child: Image.asset(
-              imageUrl ?? 'assets/images/banner1.jpeg',
+              product.imageUrl,
               height: 120,
               width: double.infinity,
               fit: BoxFit.cover,
@@ -30,9 +31,19 @@ class ProductCard extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
-              title ?? 'Product paket 500.000',
+              product.nama,
               style: TextStyle(
-                fontSize: 16.0,
+                fontSize: 14.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              'Rp ${NumberFormat('#,##0', 'id_ID').format(product.harga)}',
+              style: TextStyle(
+                fontSize: 14.0,
                 fontWeight: FontWeight.bold,
               ),
             ),

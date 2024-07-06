@@ -3,6 +3,8 @@ class User {
   final String username;
   final String role;
   final String? referralCodeUsed;
+  final String bankName;
+  final String rekening;
   final String? reseller;
   late String? access_token;
 
@@ -12,6 +14,8 @@ class User {
     required this.role,
     required this.referralCodeUsed,
     required this.reseller,
+    required this.bankName,
+    required this.rekening,
     this.access_token,
   });
 
@@ -21,6 +25,8 @@ class User {
         'role': role,
         'referralCodeUsed': referralCodeUsed,
         'reseller': reseller,
+        'bankName': bankName,
+        'noRekening': rekening,
         'access_token': access_token,
       };
 
@@ -30,6 +36,8 @@ class User {
         role: json['role'],
         referralCodeUsed: json['referralCodeUsed'],
         reseller: json['reseller'],
+        bankName: json['bankName'],
+        rekening: json['noRekening'],
         access_token: json['access_token'],
       );
 

@@ -7,10 +7,6 @@ class HistoryView extends GetView {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('HistoryView'),
-        centerTitle: true,
-      ),
       body: const Center(
         child: Text(
           'HistoryView is working',

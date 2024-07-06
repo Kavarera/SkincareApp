@@ -12,6 +12,7 @@ class LoginController extends GetxController {
 
   var user = Rxn<User>();
   UserService _userService = UserService();
+
   void userLogin(String username, String password) async {
     isLoading.value = true;
     _sharedPreferences = await SharedPreferences.getInstance();

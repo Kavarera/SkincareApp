@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toko_skincare/app/data/models/user_model.dart';
+import 'package:toko_skincare/app/routes/app_pages.dart';
 
 class ProfileController extends GetxController {
   var user = Rxn<User>();
@@ -34,6 +35,19 @@ class ProfileController extends GetxController {
     } catch (e) {
       Get.snackbar('Failed to load', e.toString());
       print(e);
+    }
+  }
+
+  void logout() async {
+    try {
+      _preferences = await SharedPreferences.getInstance();
+      await _preferences.remove('user');
+      user.value = null;
+      Get.offAllNamed(Routes.LOGIN);
+    } catch (e) {
+      Get.snackbar('Failed to logout', e.toString());
+      print(e);
+      Get.offAllNamed(Routes.LOGIN);
     }
   }
 }

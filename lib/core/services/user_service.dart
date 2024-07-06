@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'package:toko_skincare/app/data/models/account_model.dart';
+import 'package:toko_skincare/app/data/models/user_model.dart';
 import 'package:toko_skincare/core/api/api_config.dart';
 import 'package:http/http.dart' as http;
 
@@ -77,6 +79,30 @@ class UserService {
     } catch (e) {
       print('Exception occurred: $e');
       throw Exception('Failed to Register: $e');
+    }
+  }
+
+  Future<List<dynamic>> getUsers(String token) async {
+    final url = Uri.parse('${ApiConfig.baseUrl + ApiConfig.users}');
+    try {
+      print('Attempting to user at: $url');
+      final http.Response response = await http.get(
+        url,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer $token',
+        },
+      );
+
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        print(data.runtimeType);
+        print(data[11]);
+        return data;
+      }
+      throw Exception('Failed to load users ${response.reasonPhrase}');
+    } catch (e) {
+      throw Exception(e);
     }
   }
 }

@@ -3,8 +3,8 @@ class User {
   final String username;
   final String role;
   final String? referralCodeUsed;
-  final String bankName;
-  final String rekening;
+  final String? bankName;
+  final String? rekening;
   final String? reseller;
   late String? access_token;
 
@@ -35,10 +35,10 @@ class User {
         username: json['username'],
         role: json['role'],
         referralCodeUsed: json['referralCodeUsed'],
-        reseller: json['reseller'],
         bankName: json['bankName'],
         rekening: json['noRekening'],
         access_token: json['access_token'],
+        reseller: json['reseller'],
       );
 
   void setToken(String token) {

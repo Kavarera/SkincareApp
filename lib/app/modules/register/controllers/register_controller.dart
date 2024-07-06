@@ -38,7 +38,7 @@ class RegisterController extends GetxController {
             referal.isEmpty ? null : referal, rekening, "BANK $currentBank");
         if (result) {
           Get.snackbar('Success', 'Berhasil mendaftar');
-          Get.offNamed(Routes.LOGIN);
+          Get.back();
         }
         throw new Exception('Failed to register');
       } catch (e) {

@@ -100,7 +100,9 @@ class LoginView extends GetView<LoginController> {
                 },
                 child: Obx(
                   () => controller.isLoading.value
-                      ? CircularProgressIndicator()
+                      ? CircularProgressIndicator(
+                          color: Colors.white,
+                        )
                       : Text(
                           'Login',
                           style: GoogleFonts.poppins(

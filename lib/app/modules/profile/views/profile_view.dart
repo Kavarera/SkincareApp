@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../routes/app_pages.dart';
 import '../controllers/profile_controller.dart';
 
 class ProfileView extends GetView<ProfileController> {
@@ -26,7 +25,7 @@ class ProfileView extends GetView<ProfileController> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Nama Lengkap',
+                    'Username',
                     style: GoogleFonts.poppins(color: Colors.grey),
                   ),
                   Text(
@@ -41,11 +40,13 @@ class ProfileView extends GetView<ProfileController> {
                     height: 10,
                   ),
                   Text(
-                    controller.user.value!.referralCodeUsed ?? '-',
+                    'Referral Code',
                     style: GoogleFonts.poppins(color: Colors.grey),
                   ),
                   Text(
-                    '-',
+                    // 'bbbb',
+                    controller.user.value!.referralCodeUsed ??
+                        'No Referral Code',
                     style: GoogleFonts.poppins(
                       color: Colors.black,
                       fontWeight: FontWeight.w600,
@@ -59,7 +60,8 @@ class ProfileView extends GetView<ProfileController> {
                     style: GoogleFonts.poppins(color: Colors.grey),
                   ),
                   Text(
-                    '123 456 7890',
+                    // 'aaaa',
+                    "${controller.user.value!.rekening ?? 'Rekening'} (${controller.user.value!.bankName ?? 'Bank'})",
                     style: GoogleFonts.poppins(
                       color: Colors.black,
                       fontWeight: FontWeight.w600,
@@ -72,25 +74,25 @@ class ProfileView extends GetView<ProfileController> {
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: () {
-                        Get.toNamed(Routes.PROFILE_EDIT);
+                        controller.logout();
                       },
-                      child: Text('Ubah Profile'),
+                      child: Text('Keluar'),
                     ),
                   ),
-                  Positioned(
-                    bottom: 0,
-                    left: 0,
-                    right: 0,
-                    child: SizedBox(
-                      width: double.infinity,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          Get.offAllNamed(Routes.LOGIN);
-                        },
-                        child: Text('Keluar'),
-                      ),
-                    ),
-                  )
+                  // Positioned(
+                  //   bottom: 0,
+                  //   left: 0,
+                  //   right: 0,
+                  //   child: SizedBox(
+                  //     width: double.infinity,
+                  //     child: ElevatedButton(
+                  //       onPressed: () {
+                  //         Get.offAllNamed(Routes.LOGIN);
+                  //       },
+                  //       child: Text('Keluar'),
+                  //     ),
+                  //   ),
+                  // )
                 ],
               ),
             );

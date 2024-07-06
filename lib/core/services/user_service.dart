@@ -1,6 +1,4 @@
 import 'dart:convert';
-import 'package:toko_skincare/app/data/models/account_model.dart';
-import 'package:toko_skincare/app/data/models/user_model.dart';
 import 'package:toko_skincare/core/api/api_config.dart';
 import 'package:http/http.dart' as http;
 
@@ -96,13 +94,56 @@ class UserService {
 
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
-        print(data.runtimeType);
-        print(data[11]);
         return data;
       }
       throw Exception('Failed to load users ${response.reasonPhrase}');
     } catch (e) {
       throw Exception(e);
+    }
+  }
+
+  Future<bool> deleteAccount(String token, int id) async {
+    final url = Uri.parse('${ApiConfig.baseUrl + ApiConfig.users}/$id');
+    print('Attempting to delete in at: $url');
+    try {
+      final http.Response response = await http.delete(
+        url,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer $token',
+        },
+      );
+      return response.statusCode == 200 ? true : false;
+    } catch (e) {
+      throw Exception("$e");
+    }
+  }
+
+  Future<bool> updateUser(int id, String token, String? role, String? bank,
+      String? rekening, String? password) async {
+    final url = Uri.parse('${ApiConfig.baseUrl + ApiConfig.users}/$id');
+    try {
+      final http.Response response = await http.put(
+        url,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer $token',
+        },
+        body: jsonEncode(<String, String?>{
+          if (role != null) 'role': role,
+          if (bank != null) 'bankName': bank,
+          if (rekening != null) 'noRekening': rekening,
+          if (password != null) 'password': password,
+        }),
+      );
+      print(response.body);
+      if (response.statusCode == 200) {
+        return true;
+      } else {
+        throw Exception('Failed to update');
+      }
+    } catch (e) {
+      throw Exception('$e');
     }
   }
 }

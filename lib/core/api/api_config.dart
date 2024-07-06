@@ -5,4 +5,5 @@ class ApiConfig {
   static final String registerCustomer = '/auth/register';
   static final String transaction = '/transactions';
   static final String users = '/users';
+  static final String bank = '/bank';
 }

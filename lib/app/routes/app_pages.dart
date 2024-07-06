@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import '../modules/admin/account_detail/bindings/account_detail_binding.dart';
+import '../modules/admin/account_detail/views/account_detail_view.dart';
 import '../modules/admin/beranda_admin/bindings/beranda_admin_binding.dart';
 import '../modules/admin/beranda_admin/views/beranda_admin_view.dart';
 import '../modules/admin/new_reseller/bindings/new_reseller_binding.dart';
@@ -78,6 +80,11 @@ class AppPages {
       name: _Paths.DETAIL_PRODUCT,
       page: () => DetailProductView(),
       binding: DetailProductBinding(),
+    ),
+    GetPage(
+      name: _Paths.ACCOUNT_DETAIL,
+      page: () => AccountDetailView(),
+      binding: AccountDetailBinding(),
     ),
   ];
 }

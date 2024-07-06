@@ -26,7 +26,7 @@ class ResellerlistView extends GetView {
                     children: [
                       InkWell(
                         onTap: () {
-                          print('tap all');
+                          controller.changeRole(0);
                         },
                         child: Container(
                           decoration: BoxDecoration(
@@ -43,7 +43,7 @@ class ResellerlistView extends GetView {
                       ),
                       InkWell(
                         onTap: () {
-                          print('tap Reseller');
+                          controller.changeRole(1);
                         },
                         child: Container(
                           decoration: BoxDecoration(
@@ -60,7 +60,7 @@ class ResellerlistView extends GetView {
                       ),
                       InkWell(
                         onTap: () {
-                          print('tap User');
+                          controller.changeRole(2);
                         },
                         child: Container(
                           decoration: BoxDecoration(
@@ -84,25 +84,56 @@ class ResellerlistView extends GetView {
                 Expanded(child: Obx(() {
                   if (controller.visibleListUser.isEmpty) {
                     return Center(child: Text('No Data'));
+                  } else if (controller.isLoading.value == true) {
+                    return Center(
+                      child: CircularProgressIndicator(
+                        color: Colors.amberAccent,
+                      ),
+                    );
                   } else {
-                    return ListView.builder(
-                      itemCount: controller.visibleListUser.length,
-                      itemBuilder: (context, index) {
-                        return ListTile(
-                          title: Column(
-                            children: [
-                              Text(
-                                controller.visibleListUser
-                                    .elementAt(index)
-                                    .username,
-                                style: TextStyle(
-                                  fontSize: 18,
+                    return RefreshIndicator(
+                      onRefresh: controller.getAllAccount,
+                      child: ListView.builder(
+                        itemCount: controller.visibleListUser.length,
+                        itemBuilder: (context, index) {
+                          return ListTile(
+                            onTap: () {
+                              controller.gotoAccountProfile(
+                                  controller.visibleListUser[index]);
+                            },
+                            title: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  controller.visibleListUser
+                                      .elementAt(index)
+                                      .username,
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
-                        );
-                      },
+                                Text(
+                                  controller.visibleListUser
+                                      .elementAt(index)
+                                      .role,
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            trailing: IconButton(
+                                onPressed: () {
+                                  controller.deleteAccount(
+                                      controller.visibleListUser[index]);
+                                },
+                                icon: Icon(
+                                  Icons.delete,
+                                  color: Colors.red,
+                                )),
+                          );
+                        },
+                      ),
                     );
                   }
                 }))

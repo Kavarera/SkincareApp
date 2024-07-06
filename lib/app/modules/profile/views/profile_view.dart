@@ -76,6 +76,20 @@ class ProfileView extends GetView<ProfileController> {
                       },
                       child: Text('Ubah Profile'),
                     ),
+                  ),
+                  Positioned(
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    child: SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Get.offAllNamed(Routes.LOGIN);
+                        },
+                        child: Text('Keluar'),
+                      ),
+                    ),
                   )
                 ],
               ),

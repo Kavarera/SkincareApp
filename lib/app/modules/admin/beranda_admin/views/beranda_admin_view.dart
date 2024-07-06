@@ -18,13 +18,27 @@ class BerandaAdminView extends GetView<BerandaAdminController> {
             isScrollable: false,
             controller: controller.tabController,
             tabs: [
-              ElevatedButton(
-                onPressed: () {},
-                child: Text('Test'),
+              Container(
+                padding: const EdgeInsets.symmetric(vertical: 15),
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: Color.fromRGBO(169, 107, 169, 1),
+                  borderRadius: BorderRadius.circular(18),
+                ),
+                child: Center(
+                  child: Text('Test'),
+                ),
               ),
-              ElevatedButton(
-                onPressed: () {},
-                child: Text('Test'),
+              Container(
+                padding: const EdgeInsets.symmetric(vertical: 15),
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: Color.fromRGBO(169, 107, 169, 1),
+                  borderRadius: BorderRadius.circular(18),
+                ),
+                child: Center(
+                  child: Text('Test'),
+                ),
               ),
             ],
           ),

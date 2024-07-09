@@ -2,7 +2,6 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:toko_skincare/app/data/models/product_model.dart';
 import 'package:toko_skincare/app/modules/history/views/history_view.dart';
-import 'package:toko_skincare/app/modules/login/views/login_view.dart';
 import 'package:toko_skincare/app/modules/product/views/product_view.dart';
 import 'package:toko_skincare/app/modules/profile/views/profile_view.dart';
 import 'package:toko_skincare/app/routes/app_pages.dart';
@@ -13,7 +12,7 @@ class HomeController extends GetxController {
     currentIndex.value = value;
   }
 
-  var listProduct = List<Product>.empty(growable: true).obs;
+  var listProduct = <Product>[].obs;
   var selectedProduct = Rxn<Product>();
 
   @override
@@ -135,7 +134,7 @@ Baikal skullcap
         harga: 100000,
         imageUrl: 'assets/images/product4.jpg'));
     listProduct.value.add(Product(
-        id: 5,
+        id: 8,
         nama: 'Deaco Brightening Facial Toner 100ml ',
         deskripsi: '''TONER BRIGHTENING
 Toner Brightening diperkaya dengan

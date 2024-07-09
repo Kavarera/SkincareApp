@@ -36,12 +36,11 @@ class DetailProductController extends GetxController {
       }
       User user = User.fromJson(json.decode(dataUser));
       HomeController hc = Get.find();
-      await _service.createTransaction(
+      String qrUrl = await _service.createTransaction(
           user.access_token!, user.id, hc.selectedProduct.value!.id);
-      Get.snackbar('Success', 'Product telah dibeli, periksa status di history',
-          duration: const Duration(seconds: 2));
+      if (!qrUrl.isEmpty) {}
     } catch (e) {
-      Get.snackbar('Failed to buy', e.toString());
+      Get.snackbar('Gagal untuk membeli', e.toString());
     } finally {
       isLoading.value = false;
     }

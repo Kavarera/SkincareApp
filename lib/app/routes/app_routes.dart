@@ -14,6 +14,7 @@ abstract class Routes {
   static const NEW_RESELLER = _Paths.NEW_RESELLER;
   static const DETAIL_PRODUCT = _Paths.DETAIL_PRODUCT;
   static const ACCOUNT_DETAIL = _Paths.ACCOUNT_DETAIL;
+  static const PEMBAYARAN = _Paths.PEMBAYARAN;
 }
 
 abstract class _Paths {
@@ -29,4 +30,5 @@ abstract class _Paths {
   static const NEW_RESELLER = '/new-reseller';
   static const DETAIL_PRODUCT = '/detail-product';
   static const ACCOUNT_DETAIL = '/account-detail';
+  static const PEMBAYARAN = '/pembayaran';
 }

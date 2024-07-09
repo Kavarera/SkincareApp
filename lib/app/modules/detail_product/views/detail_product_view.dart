@@ -86,7 +86,8 @@ class DetailProductView extends GetView<DetailProductController> {
                   width: double.infinity,
                   child: ElevatedButton(
                       onPressed: () {
-                        controller.createTransaction();
+                        controller.createTransaction(
+                            homeController.selectedProduct.value!);
                       },
                       child: Obx(() => controller.isLoading == true
                           ? CircularProgressIndicator()

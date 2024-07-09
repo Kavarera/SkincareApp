@@ -1,12 +1,15 @@
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../../data/models/product_model.dart';
 
 class HistoryController extends GetxController {
-  //TODO: Implement HistoryController
-
-  final count = 0.obs;
+  var historyTransaction = <Product>[].obs;
+  late SharedPreferences pref;
   @override
   void onInit() {
     super.onInit();
+    setup();
   }
 
   @override
@@ -19,5 +22,9 @@ class HistoryController extends GetxController {
     super.onClose();
   }
 
-  void increment() => count.value++;
+  void setup() async {
+    pref = await SharedPreferences.getInstance();
+    List<Product> products = await getProductsFromSharedPreferences();
+    historyTransaction.assignAll(products);
+  }
 }

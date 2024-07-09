@@ -2,15 +2,16 @@ import 'dart:convert';
 
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:toko_skincare/app/data/models/product_model.dart';
 import 'package:toko_skincare/app/data/models/user_model.dart';
 import 'package:toko_skincare/app/modules/home/controllers/home_controller.dart';
-import 'package:toko_skincare/app/modules/product/controllers/product_controller.dart';
 import 'package:toko_skincare/app/routes/app_pages.dart';
 import 'package:toko_skincare/core/services/transaction_service.dart';
 
 class DetailProductController extends GetxController {
   var isLoading = false.obs;
   TransactionService _service = TransactionService();
+  late List<Product> historyTransaction;
   @override
   void onInit() {
     super.onInit();
@@ -26,10 +27,11 @@ class DetailProductController extends GetxController {
     super.onClose();
   }
 
-  void createTransaction() async {
+  void createTransaction(Product product) async {
     isLoading.value = true;
     try {
       SharedPreferences pref = await SharedPreferences.getInstance();
+      historyTransaction = await getProductsFromSharedPreferences();
       String? dataUser = pref.getString('user');
       if (dataUser == null) {
         Get.snackbar('Error', 'No user detected!');
@@ -41,6 +43,8 @@ class DetailProductController extends GetxController {
           user.access_token!, user.id, hc.selectedProduct.value!.id);
       if (!qrContent.isEmpty) {
         qrContent = qrContent.split(',')[1];
+        historyTransaction.add(product);
+        await saveProductsToSharedPreferences(historyTransaction);
         Get.toNamed(Routes.PEMBAYARAN, arguments: qrContent);
       }
     } catch (e) {

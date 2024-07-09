@@ -53,6 +53,7 @@ class BerandaAdminController extends GetxController
     print(transactionTypeVisible);
     if (transactionTypeVisible == 0) {
       visibleListTransaction.value = _listTransaction;
+      print('_listTransaction length = ${_listTransaction.length}');
     } else if (transactionTypeVisible == 1) {
       visibleListTransaction.value = _listTransaction
           .where((element) => element.status == "PENDING")
@@ -71,9 +72,9 @@ class BerandaAdminController extends GetxController
 
   Future<void> getAllHistory() async {
     isLoading.value = true;
-    await Future.delayed(const Duration(seconds: 1));
+    print('get all history');
     try {
-      await getAllAccount();
+      // await getAllAccount();
       print('controller access transactionservice get transaction');
       List<dynamic> jsonUsers = await _transactionService.getHistories();
       print('result received, convert to _listAccount');
@@ -90,7 +91,7 @@ class BerandaAdminController extends GetxController
 
   Future<void> setupHistory() async {
     print('setup History');
-    await getAllHistory();
+    getAllHistory();
   }
 
   Future<void> setup() async {
@@ -98,7 +99,8 @@ class BerandaAdminController extends GetxController
     String? value = _preferences.getString('user');
     if (value != null) {
       _user.value = User.fromJson(jsonDecode(value));
-      await getAllAccount();
+      getAllAccount();
+      getAllHistory();
     }
   }
 
@@ -122,7 +124,7 @@ class BerandaAdminController extends GetxController
     super.onClose();
   }
 
-  void gotoAccountProfile(Account visibleListUser) {
+  void gotoAccountProfile(Account visibleListUser, {bool transaction = false}) {
     Get.toNamed(Routes.ACCOUNT_DETAIL, arguments: visibleListUser);
   }
 
@@ -137,7 +139,6 @@ class BerandaAdminController extends GetxController
   }
 
   void changeVisibleListUser() {
-    print(roleVisible);
     if (roleVisible == 0) {
       visibleListUser.value = _listAccount;
     } else if (roleVisible == 1) {

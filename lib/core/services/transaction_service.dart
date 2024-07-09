@@ -39,8 +39,10 @@ class TransactionService {
   }
 
   Future<List<dynamic>> getHistories() async {
+    print('histories service');
     final url = Uri.parse('${ApiConfig.baseUrl + ApiConfig.transaction}');
     try {
+      print('attempting to get transaction hsitories');
       final http.Response response = await http.get(url,
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8'
@@ -48,10 +50,12 @@ class TransactionService {
 
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
+        print('success get data');
         return data;
       }
       throw Exception('Failed to load users ${response.reasonPhrase}');
     } catch (e) {
+      print('failed $e');
       throw Exception("$e");
     }
   }

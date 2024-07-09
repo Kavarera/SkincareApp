@@ -87,9 +87,10 @@ class AccountDetailController extends GetxController {
   }
 
   void updateUser(Account account) async {
+    bool data = false;
     try {
       User user = User.fromJson(jsonDecode(_preferences.getString('user')!));
-      bool data = await _userService.updateUser(
+      data = await _userService.updateUser(
           account.id,
           user.access_token!,
           selectedRole.value.isEmpty ? null : selectedRole.value,
@@ -97,12 +98,15 @@ class AccountDetailController extends GetxController {
           noRekening.value.isEmpty ? null : noRekening.value,
           password.value.isEmpty ? null : password.value);
       if (data) {
-        Get.snackbar('Success', 'Update berhasil');
         resetFields();
-        Get.offAllNamed(Routes.BERANDA_ADMIN);
+        Get.back();
       }
     } catch (e) {
       Get.snackbar('Error', '$e');
+    } finally {
+      if (data) {
+        Get.snackbar('Success', 'Update berhasil');
+      }
     }
   }
 }

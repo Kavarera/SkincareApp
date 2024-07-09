@@ -12,7 +12,7 @@ class HistoryView extends GetView {
   Widget build(BuildContext context) {
     return Scaffold(
       body: FutureBuilder(
-        future: controller.setupHistory(),
+        future: controller.setup(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(
@@ -101,10 +101,13 @@ class HistoryView extends GetView {
                           itemBuilder: (context, index) {
                             return ListTile(
                                 onTap: () {
-                                  Get.toNamed(Routes.DETAIL_TRANSAKSI,
-                                      arguments: controller
-                                          .visibleListTransaction
-                                          .elementAt(index));
+                                  controller.gotoAccountProfile(controller
+                                      .getListAccount()
+                                      .firstWhere((element) =>
+                                          element.id ==
+                                          controller.visibleListTransaction
+                                              .elementAt(index)
+                                              .customerId));
                                 },
                                 title: Row(
                                   mainAxisAlignment: MainAxisAlignment.start,

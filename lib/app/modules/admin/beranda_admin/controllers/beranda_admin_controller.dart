@@ -104,6 +104,10 @@ class BerandaAdminController extends GetxController
     }
   }
 
+  bool checkAdmin() {
+    return _user.value?.role == "ADMIN";
+  }
+
   void changeObscure() {
     isObscure.value = !isObscure.value;
   }
@@ -125,7 +129,9 @@ class BerandaAdminController extends GetxController
   }
 
   void gotoAccountProfile(Account visibleListUser, {bool transaction = false}) {
-    Get.toNamed(Routes.ACCOUNT_DETAIL, arguments: visibleListUser);
+    if (checkAdmin()) {
+      Get.toNamed(Routes.ACCOUNT_DETAIL, arguments: visibleListUser);
+    }
   }
 
   void deleteAccount(Account visibleListUser) async {

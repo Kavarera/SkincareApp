@@ -280,7 +280,7 @@ class ResellerlistView extends GetView {
                         color: Colors.amberAccent,
                       ),
                     );
-                  } else {
+                  } else if (controller.checkAdmin()) {
                     return RefreshIndicator(
                       onRefresh: controller.getAllAccount,
                       child: ListView.builder(
@@ -325,6 +325,8 @@ class ResellerlistView extends GetView {
                         },
                       ),
                     );
+                  } else {
+                    return Center(child: Text('Not Authorized'));
                   }
                 }))
               ],

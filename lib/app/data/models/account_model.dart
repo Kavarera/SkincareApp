@@ -42,7 +42,7 @@ class Account {
     data['referralCodeUsed'] = referralCodeUsed;
     data['bankName'] = bankName;
     data['noRekening'] = noRekening;
-    data['reseller'] = reseller;
+    data['reseller'] = reseller?.toJson();
     return data;
   }
 }

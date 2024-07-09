@@ -23,7 +23,7 @@ class LoginController extends GetxController {
       //set sharedPreferences
       _sharedPreferences.setString('user', jsonEncode(user.value?.toJson()));
       print(jsonEncode(user.value?.toJson()));
-      if (user.value?.role == "ADMIN") {
+      if (user.value?.role == "ADMIN" || user.value?.role == "RESELLER") {
         Get.offNamed(Routes.BERANDA_ADMIN);
       } else {
         Get.offNamed(Routes.HOME);

@@ -1,3 +1,5 @@
+import 'account_model.dart';
+
 class User {
   final int id;
   final String username;
@@ -5,7 +7,7 @@ class User {
   final String? referralCodeUsed;
   final String? bankName;
   final String? rekening;
-  final String? reseller;
+  Reseller? reseller;
   late String? access_token;
 
   User({
@@ -13,7 +15,7 @@ class User {
     required this.username,
     required this.role,
     required this.referralCodeUsed,
-    required this.reseller,
+    this.reseller,
     required this.bankName,
     required this.rekening,
     this.access_token,
@@ -24,7 +26,7 @@ class User {
         'username': username,
         'role': role,
         'referralCodeUsed': referralCodeUsed,
-        'reseller': reseller,
+        'reseller': reseller?.toJson(),
         'bankName': bankName,
         'noRekening': rekening,
         'access_token': access_token,
@@ -38,7 +40,9 @@ class User {
         bankName: json['bankName'],
         rekening: json['noRekening'],
         access_token: json['access_token'],
-        reseller: json['reseller'],
+        reseller: json['reseller'] != null
+            ? Reseller.fromJson(json['reseller'])
+            : null,
       );
 
   void setToken(String token) {

@@ -15,6 +15,7 @@ abstract class Routes {
   static const DETAIL_PRODUCT = _Paths.DETAIL_PRODUCT;
   static const ACCOUNT_DETAIL = _Paths.ACCOUNT_DETAIL;
   static const PEMBAYARAN = _Paths.PEMBAYARAN;
+  static const DETAIL_TRANSAKSI = _Paths.DETAIL_TRANSAKSI;
 }
 
 abstract class _Paths {
@@ -31,4 +32,5 @@ abstract class _Paths {
   static const DETAIL_PRODUCT = '/detail-product';
   static const ACCOUNT_DETAIL = '/account-detail';
   static const PEMBAYARAN = '/pembayaran';
+  static const DETAIL_TRANSAKSI = '/detail-transaksi';
 }

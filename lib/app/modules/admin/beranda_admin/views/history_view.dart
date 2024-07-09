@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:toko_skincare/app/routes/app_pages.dart';
 
 import '../controllers/beranda_admin_controller.dart';
 
@@ -99,6 +100,12 @@ class HistoryView extends GetView {
                           itemCount: controller.visibleListTransaction.length,
                           itemBuilder: (context, index) {
                             return ListTile(
+                                onTap: () {
+                                  Get.toNamed(Routes.DETAIL_TRANSAKSI,
+                                      arguments: controller
+                                          .visibleListTransaction
+                                          .elementAt(index));
+                                },
                                 title: Row(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [

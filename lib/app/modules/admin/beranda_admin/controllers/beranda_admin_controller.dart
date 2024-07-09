@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toko_skincare/app/data/models/account_model.dart';
+import 'package:toko_skincare/app/data/models/transaction_model.dart';
 import 'package:toko_skincare/app/data/models/user_model.dart';
 import 'package:toko_skincare/app/routes/app_pages.dart';
+import 'package:toko_skincare/core/services/transaction_service.dart';
 import 'package:toko_skincare/core/services/user_service.dart';
 
 class BerandaAdminController extends GetxController
@@ -16,11 +18,18 @@ class BerandaAdminController extends GetxController
   var isLoading = false.obs;
   var _user = Rxn<User>();
   UserService _userService = UserService();
+  TransactionService _transactionService = TransactionService();
   var _listAccount = <Account>[];
   var visibleListUser = <Account>[].obs;
   var roleVisible = 0;
+  //transaction
+  var _listTransaction = <Transaction>[];
+  var visibleListTransaction = <Transaction>[].obs;
+  var transactionTypeVisible = 0;
 
   var isObscure = true.obs;
+
+  List<Account> getListAccount() => _listAccount;
 
   Future<void> getAllAccount() async {
     isLoading.value = true;
@@ -38,6 +47,50 @@ class BerandaAdminController extends GetxController
     } finally {
       isLoading.value = false;
     }
+  }
+
+  void _changeTransactionVisible() {
+    print(transactionTypeVisible);
+    if (transactionTypeVisible == 0) {
+      visibleListTransaction.value = _listTransaction;
+    } else if (transactionTypeVisible == 1) {
+      visibleListTransaction.value = _listTransaction
+          .where((element) => element.status == "PENDING")
+          .toList();
+    } else {
+      visibleListTransaction.value = _listTransaction
+          .where((element) => element.status == "SUCCESS")
+          .toList();
+    }
+  }
+
+  void changeTransactionType(int i) {
+    transactionTypeVisible = i;
+    _changeTransactionVisible();
+  }
+
+  Future<void> getAllHistory() async {
+    isLoading.value = true;
+    await Future.delayed(const Duration(seconds: 1));
+    try {
+      await getAllAccount();
+      print('controller access transactionservice get transaction');
+      List<dynamic> jsonUsers = await _transactionService.getHistories();
+      print('result received, convert to _listAccount');
+
+      _listTransaction = jsonUsers.map((e) => Transaction.fromJson(e)).toList();
+      print(_listTransaction.length);
+      _changeTransactionVisible();
+    } catch (e) {
+      print('$e');
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
+  Future<void> setupHistory() async {
+    print('setup History');
+    await getAllHistory();
   }
 
   Future<void> setup() async {

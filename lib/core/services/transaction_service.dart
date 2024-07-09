@@ -37,4 +37,22 @@ class TransactionService {
       throw Exception(e.toString());
     }
   }
+
+  Future<List<dynamic>> getHistories() async {
+    final url = Uri.parse('${ApiConfig.baseUrl + ApiConfig.transaction}');
+    try {
+      final http.Response response = await http.get(url,
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8'
+          });
+
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        return data;
+      }
+      throw Exception('Failed to load users ${response.reasonPhrase}');
+    } catch (e) {
+      throw Exception("$e");
+    }
+  }
 }

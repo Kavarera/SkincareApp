@@ -18,6 +18,7 @@ class RegisterView extends GetView<RegisterController> {
       TextEditingController();
   @override
   Widget build(BuildContext context) {
+    controller.setup();
     return Scaffold(
       // resizeToAvoidBottomInset: false,
       body: SingleChildScrollView(
@@ -182,86 +183,66 @@ class RegisterView extends GetView<RegisterController> {
                 SizedBox(
                   height: 10,
                 ),
-                Container(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Expanded(
-                        child: TextField(
-                          controller: _rekeningController,
-                          decoration: InputDecoration(
-                            labelText: "Rekening",
-                            labelStyle: TextStyle(color: Colors.black),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(
-                                width: 1,
-                                color: Colors.black,
-                              ),
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(
-                                width: 1,
-                                color: Colors.black,
-                              ),
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            prefixIcon: Icon(
-                              Icons.account_balance,
-                              color: Colors.grey,
-                            ),
-                          ),
-                        ),
+                TextField(
+                  controller: _rekeningController,
+                  decoration: InputDecoration(
+                    labelText: "Rekening",
+                    labelStyle: TextStyle(color: Colors.black),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(
+                        width: 1,
+                        color: Colors.black,
                       ),
-                      SizedBox(
-                        width: 20,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(
+                        width: 1,
+                        color: Colors.black,
                       ),
-                      Expanded(
-                        child: DropdownButtonFormField<String>(
-                            hint: Text(controller.currentBank.value.isEmpty
-                                ? 'Pilih Bank'
-                                : controller.currentBank.value),
-                            dropdownColor: Colors.white,
-                            decoration: InputDecoration(
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  width: 1,
-                                  color: Colors.black,
-                                  style: BorderStyle.solid,
-                                ),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  width: 1,
-                                  color: Colors.black,
-                                  style: BorderStyle.solid,
-                                ),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                            ),
-                            items: <String>[
-                              'BCA',
-                              'BRI',
-                              'BLU',
-                              'BTN',
-                              'BNI',
-                              'MANDIRI',
-                            ].map<DropdownMenuItem<String>>((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(value),
-                              );
-                            }).toList(),
-                            onChanged: (value) {
-                              if (value != null) {
-                                controller.changeSelectedBankName(value);
-                              }
-                            }),
-                      )
-                    ],
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    prefixIcon: Icon(
+                      Icons.account_balance,
+                      color: Colors.grey,
+                    ),
                   ),
                 ),
+                SizedBox(
+                  height: 10,
+                ),
+                DropdownButtonFormField<String>(
+                    dropdownColor: Colors.white,
+                    decoration: InputDecoration(
+                      labelText: 'Bank Name',
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          width: 1,
+                          color: Colors.black,
+                          style: BorderStyle.solid,
+                        ),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          width: 1,
+                          color: Colors.black,
+                          style: BorderStyle.solid,
+                        ),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    items: controller.listBank.map((bank) {
+                      return DropdownMenuItem<String>(
+                        value: bank.name,
+                        child: Text(bank.name),
+                      );
+                    }).toList(),
+                    onChanged: (value) {
+                      if (value != null) {
+                        controller.changeSelectedBankName(value);
+                      }
+                    }),
                 SizedBox(
                   height: 10,
                 ),

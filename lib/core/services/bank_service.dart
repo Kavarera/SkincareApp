@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class BankService {
-  Future<List<dynamic>> fetchBank(String token) async {
+  Future<List<dynamic>> fetchBank() async {
     final url =
         Uri.parse('${ApiConfig.baseUrl + ApiConfig.users + ApiConfig.bank}');
 
@@ -12,8 +12,7 @@ class BankService {
       final http.Response response = await http.get(
         url,
         headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8',
-          'Authorization': 'Bearer $token',
+          'Content-Type': 'application/json; charset=UTF-8'
         },
       );
 

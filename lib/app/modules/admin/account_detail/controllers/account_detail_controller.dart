@@ -78,7 +78,7 @@ class AccountDetailController extends GetxController {
   void getAllBank() async {
     try {
       User user = User.fromJson(jsonDecode(_preferences.getString('user')!));
-      List<dynamic> data = await _bankService.fetchBank(user.access_token!);
+      List<dynamic> data = await _bankService.fetchBank();
       listBank.value = data.map((e) => Bank.fromJson(e)).toList();
       listBank.sort((a, b) => a.name.compareTo(b.name));
     } catch (e) {

@@ -90,7 +90,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.PEMBAYARAN,
-      page: () => const PembayaranView(),
+      page: () => PembayaranView(),
       binding: PembayaranBinding(),
     ),
   ];

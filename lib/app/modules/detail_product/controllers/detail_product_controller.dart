@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toko_skincare/app/data/models/user_model.dart';
 import 'package:toko_skincare/app/modules/home/controllers/home_controller.dart';
 import 'package:toko_skincare/app/modules/product/controllers/product_controller.dart';
+import 'package:toko_skincare/app/routes/app_pages.dart';
 import 'package:toko_skincare/core/services/transaction_service.dart';
 
 class DetailProductController extends GetxController {
@@ -36,9 +37,12 @@ class DetailProductController extends GetxController {
       }
       User user = User.fromJson(json.decode(dataUser));
       HomeController hc = Get.find();
-      String qrUrl = await _service.createTransaction(
+      String qrContent = await _service.createTransaction(
           user.access_token!, user.id, hc.selectedProduct.value!.id);
-      if (!qrUrl.isEmpty) {}
+      if (!qrContent.isEmpty) {
+        qrContent = qrContent.split(',')[1];
+        Get.toNamed(Routes.PEMBAYARAN, arguments: qrContent);
+      }
     } catch (e) {
       Get.snackbar('Gagal untuk membeli', e.toString());
     } finally {

@@ -22,7 +22,7 @@ class TransactionService {
       print('Response body: ${response.body}');
       if (response.statusCode == 201) {
         Map<String, dynamic> data = jsonDecode(response.body);
-        return data['espay']['qrUrl'];
+        return data['espay']['qrContent'];
       } else {
         print('Failed to login. Status code: ${response.statusCode}');
         print('Response body: ${response.body}');

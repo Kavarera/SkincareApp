@@ -20,6 +20,8 @@ class BerandaAdminController extends GetxController
   var visibleListUser = <Account>[].obs;
   var roleVisible = 0;
 
+  var isObscure = true.obs;
+
   Future<void> getAllAccount() async {
     isLoading.value = true;
     try {
@@ -45,6 +47,10 @@ class BerandaAdminController extends GetxController
       _user.value = User.fromJson(jsonDecode(value));
       await getAllAccount();
     }
+  }
+
+  void changeObscure() {
+    isObscure.value = !isObscure.value;
   }
 
   @override
@@ -99,5 +105,23 @@ class BerandaAdminController extends GetxController
     await getAllAccount();
   }
 
-  void createReseller() {}
+  void createReseller(
+      String username, String password, String norek, String bankName) async {
+    bool result = false;
+    try {
+      result = await _userService.createReseller(
+          _user.value!.access_token!, username, password, norek, bankName);
+
+      if (result) {
+        Get.back();
+      }
+    } catch (e) {
+      Get.snackbar('Error', "$e");
+    } finally {
+      if (result) {
+        Get.snackbar('Success', 'Berhasil membuat reseller');
+        getAllAccount();
+      }
+    }
+  }
 }

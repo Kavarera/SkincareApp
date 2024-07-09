@@ -146,4 +146,33 @@ class UserService {
       throw Exception('$e');
     }
   }
+
+  Future<bool> createReseller(String token, String username, String password,
+      String noRekening, String bankName) async {
+    final url = Uri.parse('${ApiConfig.baseUrl + ApiConfig.users}');
+    try {
+      final http.Response response = await http.post(
+        url,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer $token',
+        },
+        body: jsonEncode(<String, String?>{
+          'username': username,
+          'password': password,
+          'role': 'RESELLER',
+          'noRekening': noRekening,
+          'bankName': bankName
+        }),
+      );
+      print(response.body);
+      if (response.statusCode == 201) {
+        return true;
+      } else {
+        throw Exception('Failed to create reseller ${response.reasonPhrase}');
+      }
+    } catch (e) {
+      throw Exception('$e');
+    }
+  }
 }

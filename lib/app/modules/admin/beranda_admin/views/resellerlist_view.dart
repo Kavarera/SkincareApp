@@ -30,22 +30,6 @@ class ResellerlistView extends GetView {
                   children: [
                     Stack(
                       children: [
-                        TextField(
-                          controller: _usernameController,
-                          decoration: InputDecoration(
-                            label: Text("Username"),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: Colors.blue, width: 3.0),
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: Colors.grey, width: 3.0),
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                          ),
-                        ),
                         Padding(
                           padding: const EdgeInsets.only(top: 10),
                           child: Center(
@@ -73,6 +57,52 @@ class ResellerlistView extends GetView {
                     ),
                     SizedBox(
                       height: 20,
+                    ),
+                    TextField(
+                      controller: _usernameController,
+                      decoration: InputDecoration(
+                        label: Text("Username"),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: Colors.blue, width: 3.0),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: Colors.grey, width: 3.0),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Obx(
+                      () => TextField(
+                        obscureText: controller.isObscure.value,
+                        controller: _passwordController,
+                        decoration: InputDecoration(
+                          label: Text("Password"),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide:
+                                BorderSide(color: Colors.blue, width: 3.0),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide:
+                                BorderSide(color: Colors.grey, width: 3.0),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          suffix: InkWell(
+                            onTap: () {
+                              controller.changeObscure();
+                            },
+                            child: Icon(controller.isObscure.value
+                                ? Icons.visibility
+                                : Icons.visibility_off),
+                          ),
+                        ),
+                      ),
                     ),
                     SizedBox(
                       height: 10,
@@ -110,27 +140,11 @@ class ResellerlistView extends GetView {
                       height: 10,
                     ),
                     TextField(
+                      onChanged: (value) {
+                        accountController.updatenoRekening(value);
+                      },
                       decoration: InputDecoration(
                         label: Text("Rekening"),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Colors.blue, width: 3.0),
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Colors.grey, width: 3.0),
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    TextField(
-                      obscureText: true,
-                      decoration: InputDecoration(
-                        label: Text("New Password"),
                         focusedBorder: OutlineInputBorder(
                           borderSide:
                               BorderSide(color: Colors.blue, width: 3.0),
@@ -150,7 +164,28 @@ class ResellerlistView extends GetView {
                       width: double.infinity,
                       child: ElevatedButton(
                           onPressed: () {
-                            controller.createReseller();
+                            if (_passwordController.text.trim().length <= 8) {
+                              Get.snackbar('Error',
+                                  'Password harus lebih dari 8 karakter');
+                            } else if (_usernameController.text
+                                    .trim()
+                                    .isEmpty ||
+                                _passwordController.text.trim().isEmpty ||
+                                accountController.noRekening.value
+                                    .trim()
+                                    .isEmpty) {
+                              Get.snackbar('Error',
+                                  'Username, Password, Rekening tidak boleh kosong');
+                            } else {
+                              controller.createReseller(
+                                  _usernameController.text,
+                                  _passwordController.text,
+                                  accountController.noRekening.value,
+                                  accountController.bank.value);
+                              accountController.resetFields();
+                              _usernameController.clear();
+                              _passwordController.clear();
+                            }
                           },
                           child: Text('Buat Reseller')),
                     )

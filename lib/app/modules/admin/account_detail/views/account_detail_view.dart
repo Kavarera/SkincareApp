@@ -233,28 +233,28 @@ class AccountDetailView extends GetView<AccountDetailController> {
                                         controller.updatePassword(value);
                                       },
                                       decoration: InputDecoration(
-                                          label: Text("New Password"),
-                                          focusedBorder: OutlineInputBorder(
-                                            borderSide: BorderSide(
-                                                color: Colors.blue, width: 3.0),
-                                            borderRadius:
-                                                BorderRadius.circular(12),
-                                          ),
-                                          enabledBorder: OutlineInputBorder(
-                                            borderSide: BorderSide(
-                                                color: Colors.grey, width: 3.0),
-                                            borderRadius:
-                                                BorderRadius.circular(12),
-                                          ),
-                                          suffix: InkWell(
-                                            onTap: () {
-                                              controller.changeObscure();
-                                            },
-                                            child: Icon(
-                                                controller.isObscure.value
-                                                    ? Icons.visibility
-                                                    : Icons.visibility_off),
-                                          )),
+                                        label: Text("New Password"),
+                                        focusedBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                              color: Colors.blue, width: 3.0),
+                                          borderRadius:
+                                              BorderRadius.circular(12),
+                                        ),
+                                        enabledBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                              color: Colors.grey, width: 3.0),
+                                          borderRadius:
+                                              BorderRadius.circular(12),
+                                        ),
+                                        suffix: InkWell(
+                                          onTap: () {
+                                            controller.changeObscure();
+                                          },
+                                          child: Icon(controller.isObscure.value
+                                              ? Icons.visibility
+                                              : Icons.visibility_off),
+                                        ),
+                                      ),
                                     ),
                                   ),
                                   SizedBox(

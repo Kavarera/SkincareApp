@@ -97,7 +97,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.DETAIL_TRANSAKSI,
-      page: () => const DetailTransaksiView(),
+      page: () => DetailTransaksiView(),
       binding: DetailTransaksiBinding(),
     ),
   ];

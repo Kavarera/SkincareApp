@@ -98,4 +98,6 @@ class BerandaAdminController extends GetxController
   refreshList() async {
     await getAllAccount();
   }
+
+  void createReseller() {}
 }

@@ -102,167 +102,177 @@ class AccountDetailView extends GetView<AccountDetailController> {
                       onPressed: () {
                         controller.getAllBank();
                         showModalBottomSheet(
-                            isScrollControlled: true,
-                            useSafeArea: true,
-                            context: context,
-                            builder: (BuildContext context) {
-                              return Container(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 10, vertical: 10),
-                                child: Column(
-                                  children: [
-                                    Stack(
-                                      children: [
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(top: 10),
-                                          child: Center(
-                                            child: Text(
-                                              'Update ${_account.username}',
-                                              style: TextStyle(
-                                                fontSize: 20,
-                                                fontWeight: FontWeight.bold,
-                                              ),
+                          isScrollControlled: true,
+                          useSafeArea: true,
+                          context: context,
+                          builder: (BuildContext context) {
+                            return Container(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 10),
+                              child: Column(
+                                children: [
+                                  Stack(
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.only(top: 10),
+                                        child: Center(
+                                          child: Text(
+                                            'Update ${_account.username}',
+                                            style: TextStyle(
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.bold,
                                             ),
                                           ),
                                         ),
-                                        Positioned(
-                                          right: 0,
-                                          top: 0,
-                                          child: IconButton(
-                                            onPressed: () {
-                                              Get.back();
-                                              controller.resetFields();
-                                            },
-                                            icon: Icon(Icons.close),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 20,
-                                    ),
-                                    DropdownButtonFormField<String>(
-                                      dropdownColor: Colors.white,
-                                      value: controller.selectedRole.value,
-                                      items: controller.roles.map((role) {
-                                        return DropdownMenuItem<String>(
-                                          value: role,
-                                          child: Text(role),
-                                        );
-                                      }).toList(),
-                                      onChanged: (newValue) {
-                                        controller.updateRole(newValue!);
-                                      },
-                                      decoration: InputDecoration(
-                                        labelText: 'Role',
-                                        labelStyle: TextStyle(
-                                          color: Colors.grey,
-                                        ),
-                                        focusedBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(
-                                              color: Colors.blue, width: 3.0),
-                                          borderRadius:
-                                              BorderRadius.circular(12),
-                                        ),
-                                        enabledBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(
-                                              color: Colors.grey, width: 3.0),
-                                          borderRadius:
-                                              BorderRadius.circular(12),
-                                        ),
                                       ),
-                                    ),
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                    DropdownButtonFormField<String>(
-                                      dropdownColor: Colors.white,
-                                      value: controller.listBank[0].name,
-                                      items: controller.listBank.map((bank) {
-                                        return DropdownMenuItem<String>(
-                                          value: bank.name,
-                                          child: Text(bank.name),
-                                        );
-                                      }).toList(),
-                                      onChanged: (newValue) {
-                                        controller.updatebank(newValue!);
-                                      },
-                                      decoration: InputDecoration(
-                                        labelText: 'Bank Name',
-                                        labelStyle: TextStyle(
-                                          color: Colors.grey,
-                                        ),
-                                        focusedBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(
-                                              color: Colors.blue, width: 3.0),
-                                          borderRadius:
-                                              BorderRadius.circular(12),
-                                        ),
-                                        enabledBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(
-                                              color: Colors.grey, width: 3.0),
-                                          borderRadius:
-                                              BorderRadius.circular(12),
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                    TextField(
-                                      decoration: InputDecoration(
-                                        label: Text("Rekening"),
-                                        focusedBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(
-                                              color: Colors.blue, width: 3.0),
-                                          borderRadius:
-                                              BorderRadius.circular(12),
-                                        ),
-                                        enabledBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(
-                                              color: Colors.grey, width: 3.0),
-                                          borderRadius:
-                                              BorderRadius.circular(12),
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                    TextField(
-                                      obscureText: true,
-                                      decoration: InputDecoration(
-                                        label: Text("New Password"),
-                                        focusedBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(
-                                              color: Colors.blue, width: 3.0),
-                                          borderRadius:
-                                              BorderRadius.circular(12),
-                                        ),
-                                        enabledBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(
-                                              color: Colors.grey, width: 3.0),
-                                          borderRadius:
-                                              BorderRadius.circular(12),
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                    SizedBox(
-                                      width: double.infinity,
-                                      child: ElevatedButton(
+                                      Positioned(
+                                        right: 0,
+                                        top: 0,
+                                        child: IconButton(
                                           onPressed: () {
-                                            controller.updateUser(_account);
+                                            Get.back();
+                                            controller.resetFields();
                                           },
-                                          child: Text('Submit')),
-                                    )
-                                  ],
-                                ),
-                              );
-                            });
+                                          icon: Icon(Icons.close),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+                                  DropdownButtonFormField<String>(
+                                    dropdownColor: Colors.white,
+                                    value: controller.selectedRole.value,
+                                    items: controller.roles.map((role) {
+                                      return DropdownMenuItem<String>(
+                                        value: role,
+                                        child: Text(role),
+                                      );
+                                    }).toList(),
+                                    onChanged: (newValue) {
+                                      controller.updateRole(newValue!);
+                                    },
+                                    decoration: InputDecoration(
+                                      labelText: 'Role',
+                                      labelStyle: TextStyle(
+                                        color: Colors.grey,
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: Colors.blue, width: 3.0),
+                                        borderRadius: BorderRadius.circular(12),
+                                      ),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: Colors.grey, width: 3.0),
+                                        borderRadius: BorderRadius.circular(12),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  DropdownButtonFormField<String>(
+                                    dropdownColor: Colors.white,
+                                    value: controller.listBank[0].name,
+                                    items: controller.listBank.map((bank) {
+                                      return DropdownMenuItem<String>(
+                                        value: bank.name,
+                                        child: Text(bank.name),
+                                      );
+                                    }).toList(),
+                                    onChanged: (newValue) {
+                                      controller.updatebank(newValue!);
+                                    },
+                                    decoration: InputDecoration(
+                                      labelText: 'Bank Name',
+                                      labelStyle: TextStyle(
+                                        color: Colors.grey,
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: Colors.blue, width: 3.0),
+                                        borderRadius: BorderRadius.circular(12),
+                                      ),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: Colors.grey, width: 3.0),
+                                        borderRadius: BorderRadius.circular(12),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  TextField(
+                                    onChanged: (value) {
+                                      controller.updatenoRekening(value);
+                                    },
+                                    decoration: InputDecoration(
+                                      label: Text("Rekening"),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: Colors.blue, width: 3.0),
+                                        borderRadius: BorderRadius.circular(12),
+                                      ),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: Colors.grey, width: 3.0),
+                                        borderRadius: BorderRadius.circular(12),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  Obx(
+                                    () => TextField(
+                                      obscureText: controller.isObscure.value,
+                                      onChanged: (value) {
+                                        controller.updatePassword(value);
+                                      },
+                                      decoration: InputDecoration(
+                                          label: Text("New Password"),
+                                          focusedBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                                color: Colors.blue, width: 3.0),
+                                            borderRadius:
+                                                BorderRadius.circular(12),
+                                          ),
+                                          enabledBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                                color: Colors.grey, width: 3.0),
+                                            borderRadius:
+                                                BorderRadius.circular(12),
+                                          ),
+                                          suffix: InkWell(
+                                            onTap: () {
+                                              controller.changeObscure();
+                                            },
+                                            child: Icon(
+                                                controller.isObscure.value
+                                                    ? Icons.visibility
+                                                    : Icons.visibility_off),
+                                          )),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  SizedBox(
+                                    width: double.infinity,
+                                    child: ElevatedButton(
+                                        onPressed: () {
+                                          controller.updateUser(_account);
+                                        },
+                                        child: Text('Submit')),
+                                  )
+                                ],
+                              ),
+                            );
+                          },
+                        );
                       },
                       child: Text('Update')),
                 )

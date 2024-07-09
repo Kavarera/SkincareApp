@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toko_skincare/app/data/models/account_model.dart';
 import 'package:toko_skincare/app/data/models/user_model.dart';
+import 'package:toko_skincare/app/routes/app_pages.dart';
 import 'package:toko_skincare/core/services/bank_service.dart';
 import 'package:toko_skincare/core/services/user_service.dart';
 
@@ -16,6 +17,7 @@ class AccountDetailController extends GetxController {
   Rx<String> password = ''.obs;
 
   var listBank = <Bank>[].obs;
+  var isObscure = true.obs;
 
   BankService _bankService = BankService();
   UserService _userService = UserService();
@@ -35,6 +37,10 @@ class AccountDetailController extends GetxController {
 
   void updatenoRekening(String newnoRekening) {
     noRekening.value = newnoRekening;
+  }
+
+  void changeObscure() {
+    isObscure.value = !isObscure.value;
   }
 
   void updatePassword(String newPassword) {
@@ -93,6 +99,7 @@ class AccountDetailController extends GetxController {
       if (data) {
         Get.snackbar('Success', 'Update berhasil');
         resetFields();
+        Get.offAllNamed(Routes.BERANDA_ADMIN);
       }
     } catch (e) {
       Get.snackbar('Error', '$e');
